@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  # Backend API
+  smart-brain-api:
+    container_name: backend
+    build: ./
+    command: npm start
+    working_dir: /usr/src/smart-brain-api
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/usr/src/smart-brain-api
+    env_file:
+      - ./.private/secret.env
+      - ./.private/api-keys.env
+  # Postgres
+  postgres:
+    container_name: database
+    build: ./postgres
+    ports:
+      - '5431:5432'
+    env_file:
+      - ./.private/dbSecret.env

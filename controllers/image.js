@@ -1,6 +1,6 @@
 const Clarifai = require('clarifai');
 
-// You must add your own API key here from Clarifai.
+// You must add your own API key in .private folder.
 const app = new Clarifai.App({
   apiKey: process.env.CLARIFAI_API_KEY
 });
@@ -14,7 +14,7 @@ const handleApiCall = (req, res) => {
     .catch((err) => res.status(400).json('unable to work with API'));
 };
 
-const handleImage = (req, res, db) => {
+const handleImage = (db) => (req, res) => {
   const { id } = req.body;
   db('users')
     .where('id', '=', id)
